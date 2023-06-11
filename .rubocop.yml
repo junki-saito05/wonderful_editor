@@ -8,3 +8,7 @@ inherit_from:
 
 AllCops:
   TargetRubyVersion: 2.7
+
+# context ごとに let! を使い分けたい場合があるため無効に
+RSpec/LetSetup:
+  Enabled: false
