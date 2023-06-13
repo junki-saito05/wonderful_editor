@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text
+#  status     :integer          default(0), not null
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -24,4 +25,12 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :title,  presence: true
+
+  enum publication_status: [:draft, :published]
+
+  # enum status: { draft: 0, published: 1 }
+
+  # 配列として定義
+  # enum status: [:draft, :published]
+  # enum status: %i(draft published)
 end
