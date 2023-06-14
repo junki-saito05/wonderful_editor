@@ -157,3 +157,41 @@ RSpec.describe "Api::V1::Articles", type: :request do
     end
   end
 end
+
+  # describe 'GET /api/v1/articles/drafts' do
+  #   subject { get(api_v1_articles_path) }
+  #   let(:user) { create(:user) }
+  #   let!(:draft_article) { create(:article, :draft, user: user) }
+
+  # before do
+  #   sign_in user
+  # end
+
+  #   fit '下書きの一覧が取得できること' do
+  #     subject
+
+  #     json = JSON.parse(response.body)
+  #     expect(response.status).to eq(200)
+  #     expect(json['articles'].length).to eq 1
+  #     expect(json['articles'][0]['id']).to eq draft_article.id
+  #   end
+  # end
+
+  # describe 'GET /api/v1/articles/:id/draft' do
+  #   subject { get(api_v1_articles_path) }
+  #   let(:user) { create(:user) }
+  #   let!(:draft_article) { create(:article, :draft, user: user) }
+
+  #   before do
+  #     sign_in user
+  #   end
+
+  #   it '下書き詳細が取得できること' do
+  #     subject
+
+  #     json = JSON.parse(response.body)
+  #     expect(response.status).to eq(200)
+  #     expect(json['id']).to eq draft_article.id
+  #     expect(json['title']).to eq draft_article.title
+  #   end
+  # end
