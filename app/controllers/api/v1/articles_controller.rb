@@ -3,13 +3,19 @@ module Api::V1
   before_action :authenticate_user!, only: [:create, :update, :destroy]
 
    def index
-     @articles = Article.published.order(updated_at: :desc)
+    @published_articles = Article.published.order(updated_at: :desc)
+    @draft_articles = current_user.articles.draft.order(updated_at: :desc)
+    @articles = @published_articles + @draft_articles
      render json: @articles, each_serializer: Api::V1::ArticlePreviewSerializer
    end
 
    def show
-     article = Article.published.find(params[:id])
-     render json: article, serializer: Api::V1::ArticleSerializer
+    @article = Article.find(params[:id])
+    if @article.published? || @article.user == current_user
+      render json: @article, serializer: Api::V1::ArticleSerializer
+    else
+      render json: { errors: 'Not found' }, status: :not_found
+    end
    end
 
    def create
@@ -39,3 +45,21 @@ module Api::V1
    end
  end
 end
+
+  #  def drafts
+  #   @draft_articles = current_user.articles.draft.order(updated_at: :desc)
+  #   render json: @draft_articles, each_serializer: Api::V1::ArticlePreviewSerializer
+  #  end
+
+  #  def draft
+  #    @article = Article.find(params[:id])
+  #    if @article.user == current_user
+  #      if @article.draft?
+  #        render json: @article, serializer: Api::V1::ArticleSerializer
+  #      else
+  #        update_as_draft
+  #      end
+  #    else
+  #     render json: { errors: 'Not found' }, status: :not_found
+  #    end
+  #  end
