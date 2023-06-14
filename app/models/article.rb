@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text
-#  status     :integer          default(0), not null
+#  status     :integer          default(NULL), not null
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -26,7 +26,11 @@ class Article < ApplicationRecord
 
   validates :title,  presence: true
 
-  enum publication_status: [:draft, :published]
+  enum status: { draft: 0, published: 1 }
+
+  # def toggle_status!
+  #   draft? ? published! : draft!
+  # end
 
   # enum status: { draft: 0, published: 1 }
 

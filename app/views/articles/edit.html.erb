@@ -1,4 +1,9 @@
 <div class="form-group">
    <label>ステータス</label><br>
-   <%= form.select :status, [["下書き", "draft"],["公開", "published"]], id: "status", class: "form-control" %>
+   <%= form.select :publication_status, [["下書き", "draft"],["公開", "published"]], id: "status", class: "form-control" %>
  </div>
+
+ <p>
+  <%= f.label :publication_status %><br>
+  <%= f.select :publication_status, Article.publication_statuses.keys %>
+</p>
