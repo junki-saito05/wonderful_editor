@@ -33,7 +33,7 @@ RSpec.describe "Api::V1::Articles::Drafts", type: :request do
       context "対象の記事が自分が書いた下書きのとき" do
         let(:article) { create(:article, :draft, user: current_user) }
 
-        fit "記事の詳細を取得できる" do
+        it "記事の詳細を取得できる" do
           subject
           res = JSON.parse(response.body)
 
